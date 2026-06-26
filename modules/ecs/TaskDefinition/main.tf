@@ -74,26 +74,18 @@ resource "aws_ecs_task_definition" "backend" {
         name  = "PORT"
         value = "5000"
       },
+    ]
+
+    secrets = [
       {
         name      = "MONGO_URI"
-         value = "${var.secret_arn}:MONGO_URI::"
+         valueFrom = "${var.secret_arn}:MONGO_URI::"
       },
       {
         name      = "JWT_SECRET"
-        value = "${var.secret_arn}:JWT_SECRET::"
+        valueFrom = "${var.secret_arn}:JWT_SECRET::"
       }
     ]
-
-    # secrets = [
-    #   {
-    #     name      = "MONGO_URI"
-    #      valueFrom = "${var.secret_arn}:MONGO_URI::"
-    #   },
-    #   {
-    #     name      = "JWT_SECRET"
-    #     valueFrom = "${var.secret_arn}:JWT_SECRET::"
-    #   }
-    # ]
 
       logConfiguration = {
         logDriver = "awslogs"

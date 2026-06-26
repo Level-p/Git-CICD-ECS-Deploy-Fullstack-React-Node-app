@@ -3,7 +3,7 @@ locals {
 }
 
 resource "aws_secretsmanager_secret" "app_secrets" {
-  name = "prac2-secrets"
+  name = "prac6-secrets"
 }
 
 resource "aws_secretsmanager_secret_version" "app_secrets" {
