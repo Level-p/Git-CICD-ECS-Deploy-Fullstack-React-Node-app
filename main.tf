@@ -3,7 +3,7 @@ locals {
 }
 
 resource "aws_secretsmanager_secret" "app_secrets" {
-  name = "prac6-secrets"
+  name = "ecs12-secrets"
 }
 
 resource "aws_secretsmanager_secret_version" "app_secrets" {
@@ -68,7 +68,7 @@ resource "aws_acm_certificate_validation" "varsitix_cert_validation" {
 }
 
 module "vpc" {
-  source              = "./modules/vpc"
+  source              = "./modules/network"
   name                = local.name
   acm_certificate_arn = aws_acm_certificate.varsitix-acm-cert.arn
 }
@@ -88,6 +88,11 @@ module "alb" {
 
 module "ecr" {
   source = "./modules/ecr"
+}
+
+module "sns" {
+  source = "./modules/sns"
+  sns_name = "${local.name}-sns"
 }
 
 module "autoscale" {

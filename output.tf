@@ -16,3 +16,7 @@ output "ecs_service_front" {
 output "ecs_service_back" {
     value = module.service.back_service_name
 }
+
+output "sns" {
+  value = module.sns.sns_arn
+}
